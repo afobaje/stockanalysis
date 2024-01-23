@@ -3,26 +3,23 @@ import ConnectDB from "./config/db.js";
 
 import { stock } from "./Model/StockModel.js";
 import { stockItems } from "./Data/stock.js";
-import cors from '@fastify/cors'
-
-
-
+import cors from "@fastify/cors";
 
 const fastify = Fastify();
 
-await fastify.register(cors,{})
+await fastify.register(cors, {});
 ConnectDB();
 
 fastify.get("/", getItem);
 
+const PORT=process.env.PORT||3045
+
 try {
-  await fastify.listen({ port: process.env.PORT||3045 });
+  await fastify.listen({ port: PORT });
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
 }
-
-
 
 const postItem = async (items) => {
   try {
