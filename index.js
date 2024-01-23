@@ -16,7 +16,7 @@ ConnectDB();
 fastify.get("/", getItem);
 
 try {
-  await fastify.listen({ port: 3045 });
+  await fastify.listen({ port: process.env.PORT||3045 });
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
